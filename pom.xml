@@ -128,4 +128,11 @@
       <scope>test</scope>
     </dependency>    
   </dependencies>
+
+  <repositories>
+    <repository>
+      <id>exo</id>
+      <url>http://repository.exoplatform.org/public</url>
+    </repository>
+  </repositories>
 </project>
