@@ -24,13 +24,13 @@ import javax.jcr.RepositoryException;
 
 import junit.framework.TestCase;
 
-import org.exolatform.service.MOBService;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.StandaloneContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.entity.Book;
 import org.exoplatform.entity.BookStore;
 import org.exoplatform.entity.Model;
+import org.exoplatform.service.MOBService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;

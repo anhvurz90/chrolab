@@ -21,8 +21,8 @@
 
 
   <component>
-    <key>org.exolatform.service.MOBService</key>
-    <type>org.exolatform.service.MOBService</type>
+    <key>org.exoplatform.service.MOBService</key>
+    <type>org.exoplatform.service.MOBService</type>
   </component>
   
   <external-component-plugins>
