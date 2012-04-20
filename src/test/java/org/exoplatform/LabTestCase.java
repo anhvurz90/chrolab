@@ -18,12 +18,14 @@ package org.exoplatform;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.jcr.RepositoryException;
 
 import junit.framework.TestCase;
 
+import org.exoplatform.constant.LabNodeTypes;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.StandaloneContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
@@ -141,7 +143,18 @@ public class LabTestCase extends TestCase {
 
     book = store.getBook("3");
     assertEquals(book.getAuthor(), "John");
+    book.setTitle("Gone away");
     book.setId("4");
     assertNotNull(store.getBook("4"));
+  }
+
+  public void testSearchBook(){
+    StringBuilder whereStatement = new StringBuilder();
+    whereStatement.append(LabNodeTypes.Property.TITLE).append(" LIKE ").append("'Gone %' AND jcr:path like '%'");
+    assertEquals(2, mobService.getSession().createQueryBuilder(Book.class).where(whereStatement.toString()).get().objects()
+        .size());
+    whereStatement = new StringBuilder().append(LabNodeTypes.Property.AUTHOR).append("='John' AND jcr:path like '%'");
+    assertEquals(1, mobService.getSession().createQueryBuilder(Book.class).where(whereStatement.toString()).get().objects()
+        .size());
   }
 }
