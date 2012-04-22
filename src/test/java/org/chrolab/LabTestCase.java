@@ -14,11 +14,10 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.exoplatform;
+package org.chrolab;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.jcr.RepositoryException;
@@ -32,6 +31,8 @@ import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.entity.Book;
 import org.exoplatform.entity.BookStore;
 import org.exoplatform.entity.Model;
+import org.exoplatform.entity.Tag;
+import org.exoplatform.entity.TagStore;
 import org.exoplatform.service.MOBService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
@@ -90,17 +91,25 @@ public class LabTestCase extends TestCase {
     }
   }
   
-  public void testGetStore() throws RepositoryException{
+  /**
+   * Test get the book store
+   * @throws RepositoryException
+   */
+  public void testGetBookStore() throws RepositoryException{
     Model model = mobService.getModel();
     assertNotNull(model.getBookStore());    
   }
   
-  public void testCreateBook() throws RepositoryException{
+  /**
+   * Test create books
+   * @throws RepositoryException
+   */
+  public void testCreateBooks() throws RepositoryException{
     Model model = mobService.getModel();
     BookStore store = model.getBookStore();
     
     Book book = store.createBook();
-    book.setId("1");
+    book.setName("1");
     store.addBook(book);
     book.setTitle("Gone with the wind");
     book.setCreatedDate(new Date());
@@ -112,13 +121,16 @@ public class LabTestCase extends TestCase {
     assertNotNull(book);
     assertEquals(book.getAuthor(), "anonymous");
   }
-  
-  public void testRemoveBook() throws RepositoryException{
+  /**
+   * Test remove books
+   * @throws RepositoryException
+   */
+  public void testRemoveBooks() throws RepositoryException{
     Model model = mobService.getModel();
     BookStore store = model.getBookStore();
     
     Book book = store.createBook();
-    book.setId("2");
+    book.setName("2");
     store.addBook(book);
     
     book = store.getBook("2");
@@ -129,12 +141,16 @@ public class LabTestCase extends TestCase {
     assertNull(book);
   }
   
-  public void testUpdateBook() throws RepositoryException{
+  /**
+   * test update books
+   * @throws RepositoryException
+   */
+  public void testUpdateBooks() throws RepositoryException{
     Model model = mobService.getModel();
     BookStore store = model.getBookStore();
 
     Book book = store.createBook();
-    book.setId("3");
+    book.setName("3");
     store.addBook(book);
 
     book = store.getBook("3");
@@ -144,11 +160,14 @@ public class LabTestCase extends TestCase {
     book = store.getBook("3");
     assertEquals(book.getAuthor(), "John");
     book.setTitle("Gone away");
-    book.setId("4");
+    book.setName("4");
     assertNotNull(store.getBook("4"));
   }
 
-  public void testSearchBook(){
+  /**
+   * Test search books
+   */
+  public void testSearchBooks(){
     StringBuilder whereStatement = new StringBuilder();
     whereStatement.append(LabNodeTypes.Property.TITLE).append(" LIKE ").append("'Gone %' AND jcr:path like '%'");
     assertEquals(2, mobService.getSession().createQueryBuilder(Book.class).where(whereStatement.toString()).get().objects()
@@ -156,5 +175,61 @@ public class LabTestCase extends TestCase {
     whereStatement = new StringBuilder().append(LabNodeTypes.Property.AUTHOR).append("='John' AND jcr:path like '%'");
     assertEquals(1, mobService.getSession().createQueryBuilder(Book.class).where(whereStatement.toString()).get().objects()
         .size());
+  }
+  
+  /**
+   * Test create tags
+   * @throws RepositoryException
+   */
+  public void testCreateTags() throws RepositoryException{
+    Model model = mobService.getModel();
+    BookStore store = model.getBookStore();
+    TagStore tagStore = store.getTagStore();
+
+    Tag tag = tagStore.createTag();
+    tag.setName("0");
+    tagStore.addTag(tag);
+    tag.setTitle("Test");
+    assertNotNull(tagStore.getTag("0"));
+  }
+  
+  /**
+   * Test add tags to books
+   * @throws RepositoryException
+   */
+  public void testAddTagsToBooks() throws RepositoryException{
+    
+    Model model = mobService.getModel();
+    BookStore store = model.getBookStore();
+    TagStore tagStore = store.getTagStore();
+
+    Tag tag = tagStore.createTag();
+    tag.setName("1");
+    tagStore.addTag(tag);
+    tag.setTitle("Novel");
+    assertNotNull(tagStore.getTag("1"));
+    
+    Tag tag2 = tagStore.createTag();
+    tag2.setName("2");
+    tagStore.addTag(tag2);
+    tag2.setTitle("Comic");
+    assertNotNull(tagStore.getTag("2"));
+    
+    mobService.getSession().save();
+    
+    Book book = store.createBook();
+    book.setName("5");
+    store.addBook(book);
+    book.setTitle("Slowly");
+    tag.addBook(book);
+    tag2.addBook(book);
+    assertEquals(2, book.getTags().size());
+    
+    book = store.createBook();
+    book.setName("6");
+    store.addBook(book);
+    book.setTitle("Quicklỵ̣̣̣̣");
+    tag.addBook(book);   
+    assertEquals(2, tag.getBooks().size());
   }
 }

@@ -16,17 +16,24 @@
  */
 package org.exoplatform.entity;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
-import javax.persistence.ManyToOne;
-
+import org.chromattic.api.RelationshipType;
 import org.chromattic.api.annotations.DefaultValue;
 import org.chromattic.api.annotations.Destroy;
+import org.chromattic.api.annotations.ManyToOne;
+import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Name;
+import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
 import org.exoplatform.constant.LabNodeTypes;
+import org.exoplatform.services.jcr.util.IdGenerator;
 
 /**
  * Created by The eXo Platform SASWikiNodeType
@@ -37,10 +44,18 @@ import org.exoplatform.constant.LabNodeTypes;
 @PrimaryType(name = LabNodeTypes.BOOK)
 public abstract class Book {  
   
+  /**
+   * Name of book
+   * @return name
+   */
   @Name
-  public abstract String getId();
+  public abstract String getName();
   
-  public abstract void setId(String id);
+  /**
+   * name of book
+   * @param name
+   */
+  public abstract void setName(String name);
 
   /**
    * @return the author
@@ -98,10 +113,60 @@ public abstract class Book {
    */
   public abstract void setCodes(List<String> codes);
   
-  
+  /**
+   * Get book store
+   * @return book store
+   */
   @ManyToOne
   public abstract BookStore getBookStore();
   
+  /**
+   * Get tag link of this book
+   * @return tag link
+   */
+  @OneToMany(type = RelationshipType.REFERENCE)
+  @MappedBy(LabNodeTypes.Property.BOOK_REF)
+  public abstract Collection<TagLink> getTagLinks();
+  
+ /**
+  * Get a tag by a given name
+  * @param name of tag
+  * @return a tag
+  */
+  public Tag getTag(String name) {
+    return getTags().get(name);
+  };
+
+  /**
+   * Get total tags
+   * @return a map of tags
+   */
+  public Map<String, Tag> getTags() {
+    Iterator<TagLink> iter = getTagLinks().iterator();
+    Map<String, Tag> result = new HashMap<String, Tag>();
+    while (iter.hasNext()) {
+      TagLink tagLink = iter.next();
+      Tag tag = tagLink.getTag̣();
+      result.put(tag.getName(), tag);
+    }
+    return result;
+  }
+  
+  /**
+   * Add a tag to this book
+   * @param tag
+   */
+  public void addTag(Tag tag) {
+    TagLink tagLink = getBookStore().getTagStore().createTagLink();
+    tagLink.setName(IdGenerator.generate());
+    getBookStore().getTagStore().addTagLink(tagLink);
+    tagLink.setBook(this);
+    tagLink.setTag̣(tag);
+  }
+  
+  /**
+   * Destroy
+   */
   @Destroy
   public abstract void remove();
 

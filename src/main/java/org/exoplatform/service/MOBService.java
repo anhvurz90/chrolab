@@ -36,16 +36,25 @@ public class MOBService {
   }
 
   /**
+   * Get Chromattic manager object
    * @return the cManager
    */
   public ChromatticManager getcManager() {
     return cManager;
   }
   
+  /**
+   * Get Chromattic session
+   * @return chromattic session
+   */
   public ChromatticSession getSession() {
     return cManager.getLifeCycle("lab").getContext().getSession();
   }
   
+  /**
+   * Get model
+   * @return model
+   */
   public Model getModel() {
     Chromattic chromattic = cManager.getLifeCycle("lab").getChromattic();
     ChromatticSession chromeSession = chromattic.openSession();

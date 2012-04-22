@@ -36,16 +36,24 @@ public class Model {
   
   private static final String BOOK_STORE_NAME = "Store";
 
-  public Model(ChromatticSession chromeSession) {
-    this.session = chromeSession;
+  /**
+   * Construct based on a chromattic session
+   * @param chromSession
+   */
+  public Model(ChromatticSession chromSession) {
+    this.session = chromSession;
   }
-  
+  /**
+   * Get book store of model
+   * @return book store
+   * @throws RepositoryException
+   */
   public BookStore getBookStore() throws RepositoryException {
     if (bookStore == null) {
       bookStore = session.findByPath(BookStore.class, BOOK_STORE_NAME);
       if (bookStore == null) {
         Node rootNode = session.getJCRSession().getRootNode();
-        Node storeNode = rootNode.addNode(BOOK_STORE_NAME, LabNodeTypes.BOOK_STORE);
+        rootNode.addNode(BOOK_STORE_NAME, LabNodeTypes.BOOK_STORE);
         session.save();
         bookStore = session.findByPath(BookStore.class, BOOK_STORE_NAME);
       }

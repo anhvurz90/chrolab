@@ -25,18 +25,29 @@ package org.exoplatform.constant;
 public interface LabNodeTypes {
   public final static String BOOK_STORE = "lab:bookstore";
 
-  public final static String BOOK       = "lab:book";
+  public final static String TAG_STORE = "lab:tagstore";
 
+  public final static String BOOK = "lab:book";
+
+  public final static String TAG = "lab:tag";
+  
+  public final static String TAG_LINK = "lab:taglink";
+  
   public interface Property {
-    public final static String AUTHOR       = "author";
+    public final static String AUTHOR = "author";
 
     public final static String CREATED_DATE = "createdDate";
 
     public final static String UPDATED_DATE = "updatedDate";
 
-    public final static String TITLE        = "title";
+    public final static String TITLE = "title";
 
-    public final static String CODE         = "code";
+    public final static String CODE = "code";
+    public final static String TAGSTORE = "tagStore";
+
+    public final static String TAG_REF = "tagref";
+
+    public final static String BOOK_REF = "bookref";
 
   }
 

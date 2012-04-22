@@ -20,45 +20,102 @@
 <nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
   <nodeType name="lab:book" isMixin="false" hasOrderableChildNodes="false">
     <supertypes>
-      <supertype>nt:base</supertype>      
+      <supertype>nt:base</supertype>
       <supertype>mix:referenceable</supertype>
     </supertypes>
     <propertyDefinitions>
       <propertyDefinition name="author" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints/>
+        <valueConstraints />
         <defaultValues>
           <defaultValue>anonymous</defaultValue>
         </defaultValues>
       </propertyDefinition>
       <propertyDefinition name="createdDate" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints/>        
+        <valueConstraints />
       </propertyDefinition>
       <propertyDefinition name="updatedDate" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints/>
+        <valueConstraints />
       </propertyDefinition>
       <propertyDefinition name="title" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints/>
+        <valueConstraints />
       </propertyDefinition>
       <propertyDefinition name="code" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
-        <valueConstraints/>
+        <valueConstraints />
       </propertyDefinition>
     </propertyDefinitions>
   </nodeType>
-   
+
   <nodeType name="lab:bookstore" isMixin="false" hasOrderableChildNodes="false">
     <supertypes>
       <supertype>nt:base</supertype>
       <!-- must be referenceable in order to be found -->
       <supertype>mix:referenceable</supertype>
     </supertypes>
-    <propertyDefinitions/>
+    <propertyDefinitions />
     <childNodeDefinitions>
+      <childNodeDefinition name="tagStore" defaultPrimaryType="" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false"
+        sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>lab:tagstore</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
       <childNodeDefinition name="*" defaultPrimaryType="" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>lab:book</requiredPrimaryType>
         </requiredPrimaryTypes>
       </childNodeDefinition>
     </childNodeDefinitions>
-  </nodeType>    
+  </nodeType>
+
+  <nodeType name="lab:tagstore" isMixin="false" hasOrderableChildNodes="false">
+    <supertypes>
+      <supertype>nt:base</supertype>
+      <!-- must be referenceable in order to be found -->
+      <supertype>mix:referenceable</supertype>
+    </supertypes>
+    <propertyDefinitions />
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>lab:tag</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+      <childNodeDefinition name="*" defaultPrimaryType="" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>lab:taglink</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>
+
+  <nodeType name="lab:tag" isMixin="false" hasOrderableChildNodes="false">
+    <supertypes>
+      <supertype>nt:base</supertype>
+      <!-- must be referenceable in order to be found -->
+      <supertype>mix:referenceable</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="title" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="lab:taglink" isMixin="false" hasOrderableChildNodes="false">
+    <supertypes>
+      <supertype>nt:base</supertype>
+      <!-- must be referenceable in order to be found -->
+      <supertype>mix:referenceable</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="bookref" requiredType="Reference" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+
+      <propertyDefinition name="tagref" requiredType="Reference" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
 </nodeTypes>
   

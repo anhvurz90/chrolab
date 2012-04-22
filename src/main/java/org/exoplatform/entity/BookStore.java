@@ -19,7 +19,10 @@ package org.exoplatform.entity;
 import java.util.Map;
 
 import org.chromattic.api.annotations.Create;
+import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.OneToMany;
+import org.chromattic.api.annotations.OneToOne;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.Path;
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.WorkspaceName;
@@ -34,36 +37,77 @@ import org.exoplatform.constant.LabNodeTypes;
 @PrimaryType(name = LabNodeTypes.BOOK_STORE)
 public abstract class BookStore {
 
+  /**
+   * Get workspace name
+   * @return work space name
+   */
   @WorkspaceName
   public abstract String getWorkspaceName();  
   
+  /**
+   * Get jcr path
+   * @return jcr path
+   */
   @Path
   public abstract String getPath();
   
   /**
-   * 
+   * Get collection of books
    * @return books
    */
   @OneToMany
   public abstract Map<String,Book> getBooks();
   
   /**
-   * 
+   * Set book collection to this book store
    * @param book the book
    */
   public abstract void setBooks(Map<String,Book> book);
 
+  /**
+   * Get a book with a given id
+   * @param id is the book id
+   * @return a book
+   */
   public Book getBook(String id) {
    return getBooks().get(id);
   }
   
+  /**
+   * Add a book
+   * @param book
+   */
   public void addBook(Book book) {
-    getBooks().put(book.getId(), book);
+    getBooks().put(book.getName(), book);
   }
   
   /**
    * Create a book
+   * @return book
    */
   @Create
-  public abstract Book createBook();
+  public abstract Book createBook();  
+  
+  /**
+   * Get tag store
+   * @return tag store
+   */
+  public TagStore getTagStore() {
+    TagStore tagStore = getTags();
+    if (tagStore == null) {
+      tagStore = createTags();
+      setTags(tagStore);
+    }
+    return tagStore;
+  }
+ 
+  @OneToOne
+  @Owner
+  @MappedBy(LabNodeTypes.Property.TAGSTORE)
+  protected abstract TagStore getTags(); 
+  
+  protected abstract void setTags(TagStore tagStore);
+  
+  @Create
+  protected abstract TagStore createTags();
 }

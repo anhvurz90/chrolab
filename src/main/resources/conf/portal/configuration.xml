@@ -71,6 +71,8 @@
           <name>entities</name>
           <value>org.exoplatform.entity.Book</value>
           <value>org.exoplatform.entity.BookStore</value>
+          <value>org.exoplatform.entity.Tag</value>
+          <value>org.exoplatform.entity.TagStore</value>
         </values-param>
       </init-params>
     </component-plugin>
