@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.entity;
+package org.chrolab.entity;
 
 import java.util.Collection;
 import java.util.Date;
@@ -32,7 +32,7 @@ import org.chromattic.api.annotations.Name;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
-import org.exoplatform.constant.LabNodeTypes;
+import org.chrolab.constant.LabNodeTypes;
 import org.exoplatform.services.jcr.util.IdGenerator;
 
 /**

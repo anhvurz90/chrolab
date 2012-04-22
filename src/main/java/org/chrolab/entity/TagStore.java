@@ -1,11 +1,11 @@
-package org.exoplatform.entity;
+package org.chrolab.entity;
 
 import java.util.Map;
 
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.PrimaryType;
-import org.exoplatform.constant.LabNodeTypes;
+import org.chrolab.constant.LabNodeTypes;
 
 
 @PrimaryType(name= LabNodeTypes.TAG_STORE)

@@ -21,8 +21,8 @@
 
 
   <component>
-    <key>org.exoplatform.service.MOBService</key>
-    <type>org.exoplatform.service.MOBService</type>
+    <key>org.chrolab.service.MOBService</key>
+    <type>org.chrolab.service.MOBService</type>
   </component>
   
   <external-component-plugins>
@@ -69,10 +69,10 @@
         </value-param>
         <values-param>
           <name>entities</name>
-          <value>org.exoplatform.entity.Book</value>
-          <value>org.exoplatform.entity.BookStore</value>
-          <value>org.exoplatform.entity.Tag</value>
-          <value>org.exoplatform.entity.TagStore</value>
+          <value>org.chrolab.entity.Book</value>
+          <value>org.chrolab.entity.BookStore</value>
+          <value>org.chrolab.entity.Tag</value>
+          <value>org.chrolab.entity.TagStore</value>
         </values-param>
       </init-params>
     </component-plugin>

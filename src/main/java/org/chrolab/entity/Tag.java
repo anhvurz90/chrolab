@@ -1,4 +1,4 @@
-package org.exoplatform.entity;
+package org.chrolab.entity;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import org.chromattic.api.annotations.Name;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
-import org.exoplatform.constant.LabNodeTypes;
+import org.chrolab.constant.LabNodeTypes;
 import org.exoplatform.services.jcr.util.IdGenerator;
 
 @PrimaryType(name= LabNodeTypes.TAG)

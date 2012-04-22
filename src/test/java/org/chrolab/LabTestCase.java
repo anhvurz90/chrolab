@@ -24,16 +24,16 @@ import javax.jcr.RepositoryException;
 
 import junit.framework.TestCase;
 
-import org.exoplatform.constant.LabNodeTypes;
+import org.chrolab.constant.LabNodeTypes;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.StandaloneContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
-import org.exoplatform.entity.Book;
-import org.exoplatform.entity.BookStore;
-import org.exoplatform.entity.Model;
-import org.exoplatform.entity.Tag;
-import org.exoplatform.entity.TagStore;
-import org.exoplatform.service.MOBService;
+import org.chrolab.entity.Book;
+import org.chrolab.entity.BookStore;
+import org.chrolab.entity.Model;
+import org.chrolab.entity.Tag;
+import org.chrolab.entity.TagStore;
+import org.chrolab.service.MOBService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;

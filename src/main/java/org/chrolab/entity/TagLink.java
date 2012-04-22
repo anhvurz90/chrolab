@@ -1,11 +1,11 @@
-package org.exoplatform.entity;
+package org.chrolab.entity;
 
 import org.chromattic.api.RelationshipType;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Name;
 import org.chromattic.api.annotations.PrimaryType;
-import org.exoplatform.constant.LabNodeTypes;
+import org.chrolab.constant.LabNodeTypes;
 
 @PrimaryType(name=LabNodeTypes.TAG_LINK)
 public abstract class TagLink {

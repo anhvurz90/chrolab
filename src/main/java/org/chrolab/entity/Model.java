@@ -14,13 +14,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.entity;
+package org.chrolab.entity;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.chromattic.api.ChromatticSession;
-import org.exoplatform.constant.LabNodeTypes;
+import org.chrolab.constant.LabNodeTypes;
 
 /**
  * Created by The eXo Platform SAS
