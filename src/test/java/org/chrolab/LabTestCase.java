@@ -197,8 +197,7 @@ public class LabTestCase extends TestCase {
    * Test add tags to books
    * @throws RepositoryException
    */
-  public void testAddTagsToBooks() throws RepositoryException{
-    
+  public void testAddTagsToBooks() throws RepositoryException{    
     Model model = mobService.getModel();
     BookStore store = model.getBookStore();
     TagStore tagStore = store.getTagStore();
@@ -232,4 +231,10 @@ public class LabTestCase extends TestCase {
     tag.addBook(book);   
     assertEquals(2, tag.getBooks().size());
   }
+  
+  public void testRenameBooks() throws RepositoryException{
+    
+  }
+  
+  
 }

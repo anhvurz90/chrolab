@@ -23,6 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.chrolab.constant.LabNodeTypes;
+import org.chrolab.entity.mixin.RenamedMixin;
 import org.chromattic.api.RelationshipType;
 import org.chromattic.api.annotations.DefaultValue;
 import org.chromattic.api.annotations.Destroy;
@@ -30,9 +32,10 @@ import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Name;
 import org.chromattic.api.annotations.OneToMany;
+import org.chromattic.api.annotations.OneToOne;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
-import org.chrolab.constant.LabNodeTypes;
 import org.exoplatform.services.jcr.util.IdGenerator;
 
 /**
@@ -163,6 +166,12 @@ public abstract class Book {
     tagLink.setBook(this);
     tagLink.setTag̣(tag);
   }
+  
+  @OneToOne(type = RelationshipType.EMBEDDED)
+  @Owner
+  public abstract RenamedMixin getRenamedMixin();
+
+  public abstract void setRenamedMixin(RenamedMixin mix);
   
   /**
    * Destroy

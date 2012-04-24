@@ -118,4 +118,12 @@
     </propertyDefinitions>
   </nodeType>
 </nodeTypes>
+
+<nodeType name="lab:renamed" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="oldNames" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints/>
+      </propertyDefinition>                   
+    </propertyDefinitions>
+  </nodeType>
   

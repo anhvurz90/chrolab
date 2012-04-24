@@ -33,6 +33,8 @@ public interface LabNodeTypes {
   
   public final static String TAG_LINK = "lab:taglink";
   
+  public final static String RENAMED_MIXIN = "lab:renamed";
+  
   public interface Property {
     public final static String AUTHOR = "author";
 
@@ -48,6 +50,8 @@ public interface LabNodeTypes {
     public final static String TAG_REF = "tagref";
 
     public final static String BOOK_REF = "bookref";
+    
+    public final static String OLD_NAMES    = "oldNames";
 
   }
 

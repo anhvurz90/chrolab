@@ -1,2 +1,23 @@
+Table of contents
+1. Introduction
+2. Book store example
+3. Data struture
+
+
+======== Introduction ===============
 A playground for Chromattic
 Have fun!
+======== Book store =================
+This is an example that using Chromattic to emulate an book store. 
+* There are many books in book store
+* There are many tags in book store
+* Each book can be tagged many times
+* Each tag can be applied to many books
+======== Data structure ===============
+/
+|/BookStore
+||/Boook..n
+||/TagStore
+|||/Tag..n
+
+
