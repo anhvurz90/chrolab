@@ -16,6 +16,7 @@
  */
 package org.chrolab;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -25,15 +26,16 @@ import javax.jcr.RepositoryException;
 import junit.framework.TestCase;
 
 import org.chrolab.constant.LabNodeTypes;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.StandaloneContainer;
-import org.exoplatform.container.component.RequestLifeCycle;
 import org.chrolab.entity.Book;
 import org.chrolab.entity.BookStore;
 import org.chrolab.entity.Model;
 import org.chrolab.entity.Tag;
 import org.chrolab.entity.TagStore;
+import org.chrolab.entity.mixin.RenamedMixin;
 import org.chrolab.service.MOBService;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.StandaloneContainer;
+import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
@@ -233,7 +235,30 @@ public class LabTestCase extends TestCase {
   }
   
   public void testRenameBooks() throws RepositoryException{
+    Model model = mobService.getModel();
+    BookStore store = model.getBookStore();
+    Book book = store.createBook();
+    book.setName("7");
+    store.addBook(book);
+    book.setTitle("To be renamed 1");
     
+    book = store.createBook();
+    book.setName("8");
+    store.addBook(book);
+    book.setTitle("To be renamed 2");
+    
+    RenamedMixin renameMixin = book.getOrCreateRenamedMixin();
+    List<String> names = new ArrayList<String>();
+    if (renameMixin.getOldNames() != null) {
+      for (String id : renameMixin.getOldNames()) {
+        names.add(id);
+      }
+    }
+    names.add(book.getName());
+    renameMixin.setOldNames(names.toArray(new String[] {}));
+    book.setName("9");
+    String[] oldNames = book.getOrCreateRenamedMixin().getOldNames();
+    assertEquals("8", oldNames[0]);
   }
   
   

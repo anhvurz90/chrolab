@@ -9,3 +9,4 @@ temp
 bin
 target
 .svn
+*.patch

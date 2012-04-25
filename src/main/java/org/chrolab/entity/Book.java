@@ -169,7 +169,16 @@ public abstract class Book {
   
   @OneToOne(type = RelationshipType.EMBEDDED)
   @Owner
-  public abstract RenamedMixin getRenamedMixin();
+  abstract RenamedMixin getRenamedMixin();
+  
+  public RenamedMixin getOrCreateRenamedMixin() {
+    if (getRenamedMixin() == null) {
+      RenamedMixin renameMixin = getBookStore().getSession().create(RenamedMixin.class);
+      this.setRenamedMixin(renameMixin);
+      return renameMixin;
+    }
+    return getRenamedMixin();
+  }
 
   public abstract void setRenamedMixin(RenamedMixin mix);
   

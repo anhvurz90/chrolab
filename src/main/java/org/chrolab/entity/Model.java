@@ -57,7 +57,8 @@ public class Model {
         session.save();
         bookStore = session.findByPath(BookStore.class, BOOK_STORE_NAME);
       }
-    }    
+    }
+    bookStore.setSession(session);
     return bookStore;
   }
 }

@@ -18,6 +18,7 @@ package org.chrolab.entity;
 
 import java.util.Map;
 
+import org.chromattic.api.ChromatticSession;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.OneToMany;
@@ -44,6 +45,12 @@ public abstract class BookStore {
   @WorkspaceName
   public abstract String getWorkspaceName();  
   
+  /**
+   * Chromattic session
+   * @return chromattic session
+   */
+  private ChromatticSession session;
+
   /**
    * Get jcr path
    * @return jcr path
@@ -110,4 +117,18 @@ public abstract class BookStore {
   
   @Create
   protected abstract TagStore createTags();
+
+  /**
+   * @return the session
+   */
+  public ChromatticSession getSession() {
+    return session;
+  }
+
+  /**
+   * @param session the session to set
+   */
+  public void setSession(ChromatticSession session) {
+    this.session = session;
+  }
 }
