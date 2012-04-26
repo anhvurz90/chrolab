@@ -16,11 +16,9 @@
  */
 package org.chrolab.entity;
 
-import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.chromattic.api.ChromatticSession;
-import org.chrolab.constant.LabNodeTypes;
 
 /**
  * Created by The eXo Platform SAS
@@ -49,14 +47,10 @@ public class Model {
    * @throws RepositoryException
    */
   public BookStore getBookStore() throws RepositoryException {
+    bookStore = session.findByPath(BookStore.class, BOOK_STORE_NAME);
     if (bookStore == null) {
-      bookStore = session.findByPath(BookStore.class, BOOK_STORE_NAME);
-      if (bookStore == null) {
-        Node rootNode = session.getJCRSession().getRootNode();
-        rootNode.addNode(BOOK_STORE_NAME, LabNodeTypes.BOOK_STORE);
-        session.save();
-        bookStore = session.findByPath(BookStore.class, BOOK_STORE_NAME);
-      }
+      bookStore = session.insert(BookStore.class, BOOK_STORE_NAME);
+      session.save();
     }
     bookStore.setSession(session);
     return bookStore;
